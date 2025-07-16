@@ -13,7 +13,12 @@ import time
 from dynaconf import Dynaconf
 
 # Configuration
-settings = Dynaconf(settings_files=["../config/settings.yaml"])
+# Configuration - check if running in Docker or not
+if os.path.exists("/app/config/settings.yaml"):
+    settings = Dynaconf(settings_files=["/app/config/settings.yaml"])
+else:
+    settings = Dynaconf(settings_files=["../config/settings.yaml"])
+
 cpe_path = settings.cpe.path
 cpe_source = settings.cpe.source
 rdb = valkey.Valkey(host=settings.valkey.host, port=settings.valkey.port, db=8)

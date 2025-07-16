@@ -1,5 +1,5 @@
 server:
-  port: 8000
+  port: 10000
 valkey:
   host: 127.0.0.1
   port: 6379
